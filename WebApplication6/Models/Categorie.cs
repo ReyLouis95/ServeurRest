@@ -23,37 +23,5 @@ namespace WebApplication6.Models
             Id = id;
             Libelle = libelle;
         }
-        /// <summary>
-        /// renvoi la liste de toutes les categories de la boutique
-        /// </summary>
-        /// <returns>liste de Categorie</returns>
-        public static List<Categorie> GetAllCategories()
-        {
-            var listeCategories = new List<Categorie>();
-            int id;
-            string libelle;
-            using (var conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["connexionBdD"].ConnectionString))
-            {
-                conn.Open();
-                string req = "select id, libelle from categories";
-                try
-                {
-                    var commande = new MySqlCommand(req, conn);
-                    var lecteur = commande.ExecuteReader();
-                    while (lecteur.Read())
-                    {
-                        id = lecteur.IsDBNull(0) ? -1 : lecteur.GetInt32(0);
-                        libelle = lecteur.IsDBNull(1) ? string.Empty : lecteur.GetString(1);
-                        var categorie = new Categorie(id, libelle);
-                        listeCategories.Add(categorie);
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            return listeCategories;
-        }
     }
 }

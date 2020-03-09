@@ -10,22 +10,24 @@ namespace WebApplication6.Controllers
 {
     public class VeloController : ApiController
     {
+        private static VeloDao dao = VeloDao.getInstance();
+
         // GET api/values
         public IEnumerable<Velo> Get()
         {
-            return Velo.GetAllVelos();
+            return dao.GetAllVelos();
         }
 
         // GET api/values/5
         public Velo Get(int id)
         {
-            return Velo.GetVeloById(id);
+            return dao.GetVeloById(id);
         }
 
         [Route("api/Velo/Categorie/{id}")]
         public List<Velo> GetCateg(int id)
         {
-            return Velo.GetVeloByCateg(id);
+            return dao.GetVeloByCateg(id);
         }
 
         // POST api/values
