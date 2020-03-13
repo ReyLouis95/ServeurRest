@@ -13,6 +13,10 @@ namespace WebApplication6.Controllers
         private static VeloDao dao = VeloDao.getInstance();
 
         // GET api/values
+        /// <summary>
+        /// Documentation.
+        /// </summary>
+        /// <returns>retourne documentation.</returns>
         public IEnumerable<Velo> Get()
         {
             return dao.GetAllVelos();
@@ -31,6 +35,7 @@ namespace WebApplication6.Controllers
         }
 
         // POST api/values
+        [HttpPost]
         public void Post([FromBody]string value)
         {
         }
@@ -39,10 +44,11 @@ namespace WebApplication6.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
-
-        // DELETE api/values/5
-        public void Delete(int id)
+        [HttpPatch]
+        //PATCH api/values/5
+        public void Patch([FromBody]int id, [FromBody]int nbCommande)
         {
+            dao.DeleteProduit(id, nbCommande);
         }
     }
 }

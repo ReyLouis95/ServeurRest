@@ -135,5 +135,23 @@ namespace WebApplication6.Models
 
             return listeVelo;
         }
+
+        public bool DeleteProduit(int id, int nbCommande)
+        {
+            using (var conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["connexionBdD"].ConnectionString))
+            {
+                string req = "update table produits set quantite_stock = quantite_stock - " + nbCommande + "where id = " + id;
+                try
+                {
+                    var commande = new MySqlCommand(req, conn);
+                    commande.ExecuteReader();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return true;
+            }
+        }
     }
 }
