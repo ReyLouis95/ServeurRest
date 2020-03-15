@@ -14,41 +14,47 @@ namespace WebApplication6.Controllers
 
         // GET api/values
         /// <summary>
-        /// Documentation.
+        /// Renvoi la liste de tous les produits
         /// </summary>
-        /// <returns>retourne documentation.</returns>
+        /// <returns></returns>
         public IEnumerable<Velo> Get()
         {
             return dao.GetAllVelos();
         }
-
+        /// <summary>
+        /// renvoi un produit
+        /// </summary>
+        /// <param name="id">Id du produit demandé</param>
+        /// <returns></returns>
         // GET api/values/5
         public Velo Get(int id)
         {
             return dao.GetVeloById(id);
         }
 
+        /// <summary>
+        /// renvoi une liste de produit qui ont la même catégorie
+        /// </summary>
+        /// <param name="id">Id de la catégorie demandée</param>
+        /// <returns></returns>
         [Route("api/Velo/Categorie/{id}")]
         public List<Velo> GetCateg(int id)
         {
             return dao.GetVeloByCateg(id);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        /// <summary>
+        /// soustrait un nombre a la quantité stockée d'un produit
+        /// </summary>
+        /// <param name="id">id du produit demandé</param>
+        /// <param name="nbCommande">nombre à soustraire à la quantité stockée</param>
         [HttpPatch]
         //PATCH api/values/5
-        public void Patch([FromBody]int id, [FromBody]int nbCommande)
+        public void Patch(int id, [FromBody]int nbCommande)
         {
             dao.DeleteProduit(id, nbCommande);
         }
+
+
     }
 }

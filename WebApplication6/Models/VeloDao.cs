@@ -140,7 +140,8 @@ namespace WebApplication6.Models
         {
             using (var conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["connexionBdD"].ConnectionString))
             {
-                string req = "update table produits set quantite_stock = quantite_stock - " + nbCommande + "where id = " + id;
+                conn.Open();
+                string req = "update produits set quantite_stock = (select quantite_stock from produits where id = " + id + ") - " + nbCommande + " where id = " + id;
                 try
                 {
                     var commande = new MySqlCommand(req, conn);
